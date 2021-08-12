@@ -16,7 +16,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 monngoose.connect(MONGODB_URI, {
   useCreateIndex: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }),

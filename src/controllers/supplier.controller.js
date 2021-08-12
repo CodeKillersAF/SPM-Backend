@@ -14,7 +14,8 @@ const createSupplier = async (req, res) => {
 }
 
 const getAllSupplier = async (req, res) => {
-    await Supplier.find({}).populate('supplyItems', 'item_name unit_price')
+    //await Supplier.find({}).populate('supplyItems', 'item_name unit_price')
+    await Supplier.find({})
         .then(data => {
             res.status(200).send({ data: data });
         })
@@ -23,6 +24,18 @@ const getAllSupplier = async (req, res) => {
         });
 }
 
+const removeSupplier = async (req, res) => {
+    if (req.params.id) {
+        await Supplier.findByIdAndRemove(req.params.id)
+            .then((data) => {
+                res.status(200).send({ data: data });
+            })
+            .catch((error) => {
+                res.status(500).send(error.message);
+            });
+    }
+};
+
 module.exports = {
-    createSupplier, getAllSupplier
+    createSupplier, getAllSupplier, removeSupplier
 }
