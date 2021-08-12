@@ -3,7 +3,7 @@ const express = require("express");
 const monngoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-
+const supplierAPI = require('./src/api/supplier.api');
 
 const app = express();
 app.use(cors());
@@ -29,6 +29,8 @@ monngoose.connect(MONGODB_URI, {
 monngoose.connection.once("open", () => {
   console.log("Database connected");
 });
+
+app.use('/supplier', supplierAPI());
 
 app.listen(PORT, () => {
   console.log("You are listening to port " + PORT);
