@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const SupplyItem = new mongoose.Schema({
+const SupplyItemSchema = new mongoose.Schema({
     item_name: {
         type: String,
         required: true,
@@ -9,5 +9,13 @@ const SupplyItem = new mongoose.Schema({
     unit_price: {
         type: Number,
         required: true
-    }
+    },
+    supplier: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'suppliers'
+    }]
 })
+
+const SupplyItem = mongoose.model('supplyItems',SupplyItemSchema);
+module.exports = SupplyItem;
