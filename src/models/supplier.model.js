@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const SupplierSchema = new mongoose.Schema({
-    name: {
+    supplier_name: {
         type: String,
         required: true,
         trim: true
@@ -20,7 +20,7 @@ const SupplierSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    supplyItem: [{
+    supplyItems: [{
         type: mongoose.Schema.Types.ObjectId,
         required: false,
         ref: 'supplyItems'

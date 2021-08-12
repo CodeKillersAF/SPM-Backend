@@ -10,7 +10,7 @@ const SupplyItemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    supplier: [{
+    suppliers: [{
         type: mongoose.Schema.Types.ObjectId,
         required: false,
         ref: 'suppliers'
