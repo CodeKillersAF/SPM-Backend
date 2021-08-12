@@ -20,11 +20,12 @@ const SupplierSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    items: {
-        type: String,
-        required: true,
-        trim: true
-    }
+    supplyItem: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'supplyItems'
+    }]
+
 
 });
 
