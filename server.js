@@ -35,9 +35,9 @@ monngoose.connection.once("open", () => {
   console.log("Database connected");
 });
 
-app.use('/api/admin', require('./Auth-src/routes/Login_Route/Admin_Login.route'));
-app.use('/api/admin', require('./Auth-src/routes/Protected_Route/Admin_Protected.route'));
-app.use('/api/admin', require('./Auth-src/routes/Register_Routes/Admin_Register.route'));
+app.use('/api/admin', require('./auth_src/routes/Login_Route/Admin_Login.route'));
+app.use('/api/admin', require('./auth_src/routes/Protected_Route/Admin_Protected.route'));
+app.use('/api/admin', require('./auth_src/routes/Register_Routes/Admin_Register.route'));
 
 app.listen(PORT, () => {
   console.log("You are listening to port " + PORT);
