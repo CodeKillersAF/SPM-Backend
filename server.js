@@ -13,7 +13,7 @@ dotenv.config();
 
 // inject middleware
 app.use(passport.initialize());
-require('./Auth-src/middlewares/Validate.token')(passport);
+require('./auth_src/middlewares/Validate.token')(passport);
 
 const PORT = process.env.PORT || 8000;
 
