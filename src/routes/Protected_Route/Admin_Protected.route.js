@@ -2,10 +2,10 @@ const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
 
 // category exports
-const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory } = require('../../../src/controllers/category.controller');
+const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory } = require('../../controllers/category.controller');
 
 // food export
-const { addFood, getAllFoods, deleteFood } = require('../../../src/controllers/food.controller');
+const { addFood, getAllFoods, deleteFood } = require('../../controllers/food.controller');
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
     return res.send("Welcome Admin");
