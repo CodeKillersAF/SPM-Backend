@@ -65,9 +65,9 @@ const getOneCategory = async(req, res) => {
 /**
  * find categorie's foods
  */
- const getFoodsOfCategory = async(req, res) => {
-    if(req.params && req.params.id) {
-        await Category.findById(req.params.id).populate('foodItems', 'foodName foodDescription foodPrice url')
+ const getFoodsOfCategory = async(req, id, res) => {
+    if(req && id) {
+        await Category.findById(id).populate('foodItems', 'foodName foodDescription foodPrice url')
             .then((data) => {
                 res.status(200).send({ foodItems: data.foodItems });
             })
@@ -80,10 +80,10 @@ const getOneCategory = async(req, res) => {
 /**
  * update category foodItem array
  */
- const updateCategory = async(req, res) => {
+ const updateCategory = async(req, id, res) => {
     try {
-        if(req.body, req.params.id) {                         //$addToSet
-            await Category.findByIdAndUpdate(req.params.id, { $addToSet: req.body })
+        if(req.body, id) {                         //$addToSet
+            await Category.findByIdAndUpdate(id, { $addToSet: req.body })
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -103,7 +103,6 @@ module.exports = {
     addCategory,
     getAllCategories,
     getOneCategory,
-    deleteCategory,
     getFoodsOfCategory,
     updateCategory
 }

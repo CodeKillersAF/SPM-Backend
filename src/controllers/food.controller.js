@@ -62,7 +62,7 @@ const getAllFoods = async(req, res) => {
     }
 }
 
-odule.exports = {
+module.exports = {
     addFood,
     getAllFoods,
     deleteFood
