@@ -1,4 +1,4 @@
-const Admin = require('../model/Admin.model');
+const Admin = require('../models/Admin.model');
 const { SECRET } = require('../config');
 
 // extract request file
