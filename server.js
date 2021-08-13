@@ -3,6 +3,7 @@ const express = require("express");
 const monngoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const OnlineTakeAwayEndPoints = require('./src/routes/onlineTakeAway.routes')
 
 
 const app = express();
@@ -29,6 +30,10 @@ monngoose.connect(MONGODB_URI, {
 monngoose.connection.once("open", () => {
   console.log("Database connected");
 });
+
+app.get("/", (req, res) => res.status(200).send("server up and running"));
+
+app.use('/api/online-take-away', OnlineTakeAwayEndPoints());
 
 app.listen(PORT, () => {
   console.log("You are listening to port " + PORT);
