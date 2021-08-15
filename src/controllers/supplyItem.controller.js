@@ -23,7 +23,18 @@ const getAllSupplyItem = async (req, res) => {
         });
 }
 
+const removeSupplyItem = async (req, res) => {
+    if (req.params.id) {
+        await SupplyItem.findByIdAndRemove(req.params.id)
+            .then((data) => {
+                res.status(200).send({ data: data });
+            })
+            .catch((error) => {
+                res.status(500).send(error.message);
+            });
+    }
+};
 
 module.exports = {
-    createSupplyItem, getAllSupplyItem
+    createSupplyItem, getAllSupplyItem, removeSupplyItem
 }
