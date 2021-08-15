@@ -5,9 +5,9 @@ const onlineTakeAwayController = require('../controllers/onlineTakeAway.controll
 const onlineTakeAwayEndPoints = () => {
     router.post('/create-order', onlineTakeAwayController.createOnlineTakeAwayOrder);
     router.delete('/delete-order/:id', onlineTakeAwayController.deleteOneOnlineTakeAwayOrder);
-    router.get('/get-all-orders', onlineTakeAwayController.getAllTakeAwayOrders); //Admin protected route
-    router.get('/get-incomplete-orders', onlineTakeAwayController.getAllInCompletedTakeAwayOrders); //Admin protected route
-    router.get('/get-complete-orders', onlineTakeAwayController.getAllCompletedTakeAwayOrders); //Admin protected route
+    // router.get('/get-all-orders', onlineTakeAwayController.getAllTakeAwayOrders); //Admin protected route
+    // router.get('/get-incomplete-orders', onlineTakeAwayController.getAllInCompletedTakeAwayOrders); //Admin protected route
+    // router.get('/get-complete-orders', onlineTakeAwayController.getAllCompletedTakeAwayOrders); //Admin protected route
     return router;
 }
 
