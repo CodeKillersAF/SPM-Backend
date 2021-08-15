@@ -14,8 +14,8 @@ const createSupplier = async (req, res) => {
 }
 
 const getAllSupplier = async (req, res) => {
-    //await Supplier.find({}).populate('supplyItems', 'item_name unit_price')
-    await Supplier.find({})
+    await Supplier.find({}).populate('supplyItems', 'item_name unit_price')
+    // await Supplier.find({})
         .then(data => {
             res.status(200).send({ data: data });
         })
