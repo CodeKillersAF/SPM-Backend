@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const tableSchema = new mongoose.Schema(
   {
-    chairs: { type: String, required: true },
+    chairs: { type: Number, required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
     image: { type: String, required: false },
@@ -15,4 +15,4 @@ const tableSchema = new mongoose.Schema(
   }
 );
 
-modeule.exports = mongoose.model("Table", tableSchema);
+module.exports = mongoose.model("Table", tableSchema);
