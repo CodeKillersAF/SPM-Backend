@@ -7,7 +7,7 @@ const tableSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     description: { type: String, required: true },
     image: { type: String, required: false },
-    category: { type: String, required: true },
+    category: { type: mongoose.Schema.Types.ObjectId, ref:"TableCategory", required: true },
     isAvailable: { type: String, required: true , default:true},
   },
   {
