@@ -99,10 +99,57 @@ const getOneCategory = async(req, res) => {
     }
 }
 
+/**
+ * update category
+ */
+ const updateCategoryName = async(req, id, res) => {
+    try {
+        if(req.body, id) {                         //$addToSet
+            await Category.findByIdAndUpdate(id, { $set: req.body })
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                });
+        }
+        else {
+            console.log('No body or params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
+
+/**
+ * delete category
+ */
+const deleteCategory = async(req, res) => {
+    try {
+        if(req.params.id) {
+            await Category.findByIdAndDelete(req.params.id)
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                });
+        }
+        else {
+            console.log('No params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
+
 module.exports = {
     addCategory,
     getAllCategories,
     getOneCategory,
     getFoodsOfCategory,
-    updateCategory
+    updateCategory,
+    updateCategoryName,
+    deleteCategory
+
 }
