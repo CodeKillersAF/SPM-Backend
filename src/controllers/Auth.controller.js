@@ -11,7 +11,7 @@ const adminRegister = async (adminData , res) => {
         let usernameNotTaken = await validateUsername(adminData.username);
         if(!usernameNotTaken) {
             return res.status(400).json({
-                message: `Username is ak=lready exist`,
+                message: `Username is already exist`,
             });
         }
 
