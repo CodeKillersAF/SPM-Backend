@@ -10,7 +10,9 @@ const adminRegister = async (adminData , res) => {
 
         let usernameNotTaken = await validateUsername(adminData.username);
         if(!usernameNotTaken) {
-            return res.send("Username is already exist");
+            return res.status(400).json({
+                message: `Username is ak=lready exist`,
+            });
         }
 
         //get password
@@ -46,7 +48,7 @@ const adminRegister = async (adminData , res) => {
               })  
 
     } catch(err) {
-        res.send({ err: err.message });
+        res.status(400).json({ 'error': err });
     }
 };
 
@@ -56,7 +58,9 @@ const adminLogin = async (adminCredit, res) => {
     // check if the admin is in the database
     const admin = await Admin.findOne({ username });
     if(!admin){
-        return res.send("Username not found, Invalid Login");
+        return res.status(404).json({
+            message: "Username is not found"
+        });
     }
 
     // check the password
@@ -76,7 +80,14 @@ const adminLogin = async (adminCredit, res) => {
             expiresIn: 24
         };
 
-        return res.send({ result });
+        return res.status(200).json({ 
+            ...result,
+            message: "You are login successfully",
+         });
+    } else {
+        return res.status(403).json({
+            message: "Incorrect Password",
+        });
     }
 }
 
