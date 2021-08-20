@@ -65,9 +65,9 @@ const getOneCategory = async(req, res) => {
 /**
  * find categorie's foods
  */
- const getFoodsOfCategory = async(req, id, res) => {
-    if(req && id) {
-        await Category.findById(id).populate('foodItems', 'foodName foodDescription foodPrice url')
+ const getFoodsOfCategory = async(req, res) => {
+    if(req && req.params.id) {
+        await Category.findById(req.params.id).populate('foodItems', 'foodName foodDescription foodPrice url')
             .then((data) => {
                 res.status(200).send({ foodItems: data.foodItems });
             })

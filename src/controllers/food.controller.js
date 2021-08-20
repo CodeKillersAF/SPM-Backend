@@ -62,8 +62,55 @@ const getAllFoods = async(req, res) => {
     }
 }
 
+/**
+ * get one food
+ */
+ const getOneFood = async(req, res) => {
+    try {
+        if(req.params.id) {
+            await Food.findById(req.params.id)
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                })
+        }
+        else {
+            console.log('No params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
+
+/**
+ * update food
+ */
+const updateFood = async(req, res) => {
+    try {
+        if(req.body, req.params.id) {
+            await Food.findByIdAndUpdate(req.params.id, { $set: req.body })
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                });
+        }
+        else {
+            console.log('No body or params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
+
+
 module.exports = {
     addFood,
     getAllFoods,
-    deleteFood
+    deleteFood,
+    getOneFood,
+    updateFood
 }

@@ -5,6 +5,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const passport = require("passport");
 
+const CategoryAPI = require('./src/routes/FoodCategory.route');
+const FoodAPI = require('./src/routes/Food.route');
 
 const app = express();
 app.use(cors());
@@ -38,6 +40,9 @@ monngoose.connection.once("open", () => {
 app.use('/api/admin', require('./src/routes/Login_Route/Admin_Login.route'));
 app.use('/api/admin', require('./src/routes/Protected_Route/Admin_Protected.route'));
 app.use('/api/admin', require('./src/routes/Register_Routes/Admin_Register.route'));
+
+app.use('/api/category', CategoryAPI());
+app.use('/api/food', FoodAPI());
 
 app.listen(PORT, () => {
   console.log("You are listening to port " + PORT);
