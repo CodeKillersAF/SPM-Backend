@@ -41,18 +41,21 @@ monngoose.connection.once("open", () => {
   console.log("Database connected");
 });
 
+app.get("/", (req, res) => res.status(200).send("server up and running"));
+
 app.use('/api/admin', require('./src/routes/Login_Route/Admin_Login.route'));
 app.use('/api/admin', require('./src/routes/Protected_Route/Admin_Protected.route'));
 app.use('/api/admin', require('./src/routes/Register_Routes/Admin_Register.route'));
 
 app.use('/api/online-take-away', OnlineTakeAwayEndPoints());
+app.use('/api/online-delivery', onlineDeliveryEndPoints());
 app.use('/api/table/', tableAPI());
 app.use('/api/tableCategory/', TableCategoryAPI());
-
 
 app.use('/api/category', CategoryAPI());
 app.use('/api/food', FoodAPI());
 
 app.listen(PORT, () => {
   console.log("You are listening to port " + PORT);
+
 });
