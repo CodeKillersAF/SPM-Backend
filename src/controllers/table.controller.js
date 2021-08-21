@@ -28,7 +28,7 @@ const removeTable = async (req, res) => {
 //get all tables
 const getAllTables = async (req, res) => {
   try {
-    const tables = await Table.find({});
+    const tables = await Table.find({}).populate("TableCategory","name");
     res.status(200).json(tables);
   } catch (err) {
     res.status(500).send(err);
