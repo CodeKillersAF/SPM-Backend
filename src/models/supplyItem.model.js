@@ -10,6 +10,10 @@ const SupplyItemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    desc: {
+        type: String,
+        required: false
+    },
     suppliers: [{
         type: mongoose.Schema.Types.ObjectId,
         required: false,
