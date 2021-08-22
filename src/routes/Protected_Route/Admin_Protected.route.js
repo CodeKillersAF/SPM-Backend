@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
-const { getAllSupplier, createSupplier, removeSupplier } = require('../../controllers/supplier.controller');
+const { getAllSupplier, createSupplier, removeSupplier, updateSupplier } = require('../../controllers/supplier.controller');
 const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem } = require('../../controllers/supplyItem.controller');
 
 
@@ -38,6 +38,10 @@ router.post('/supplier', adminAuth, async (req, res) => {
 // Remove an existing supplier
 router.delete('/supplier/:id', adminAuth, async (req, res) => {
     await removeSupplier(req, res);
+})
+// Update supply item
+router.put('/supplier/:id', adminAuth, async (req, res) => {
+    await updateSupplier(req, res);
 })
 
 // Author : Kawsikan Routes for supplier details
