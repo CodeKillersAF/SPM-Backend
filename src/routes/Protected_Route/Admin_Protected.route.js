@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
 const { getAllSupplier, createSupplier, removeSupplier } = require('../../controllers/supplier.controller');
-const { getAllSupplyItem, createSupplyItem, removeSupplyItem } = require('../../controllers/supplyItem.controller');
+const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem } = require('../../controllers/supplyItem.controller');
 
 
 
@@ -52,6 +52,10 @@ router.post('/supply-item', adminAuth, async (req, res) => {
 // Remove an existing supply item
 router.delete('/supply-item/:id', adminAuth, async (req, res) => {
     await removeSupplyItem(req, res);
+})
+// Update supply item
+router.put('/supply-item/:id', adminAuth, async (req, res) => {
+    await updateSupplyItem(req, res);
 })
 
 module.exports = router;

@@ -35,6 +35,22 @@ const removeSupplyItem = async (req, res) => {
     }
 };
 
+const updateSupplyItem = async (req, res) => {
+    if (req.params.id && req.body) {
+        await SupplyItem.findByIdAndUpdate(req.params.id, {
+            item_name: req.body.item_name,
+            unit_price: req.body.unit_price,
+            desc: req.body.desc
+        })
+            .then((data) => {
+                res.status(200).send({ data: data });
+            })
+            .catch((err) => {
+                res.status(500).send({ err: err.message });
+            });
+    }
+};
+
 module.exports = {
-    createSupplyItem, getAllSupplyItem, removeSupplyItem
+    createSupplyItem, getAllSupplyItem, removeSupplyItem, updateSupplyItem
 }
