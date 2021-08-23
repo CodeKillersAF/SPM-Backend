@@ -1,11 +1,15 @@
 const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
 
+
 // category exports
 const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, updateCategoryAfterDelete } = require('../../controllers/category.controller');
 
 // food export
 const { addFood, getAllFoods, deleteFood, getOneFood, updateFood } = require('../../controllers/food.controller');
+
+const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTakeAwayOrders } = require('../../controllers/onlineTakeAway.controllers');
+
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
     return res.send("Welcome Admin");
@@ -65,5 +69,22 @@ router.put('/food/update-food/:id', adminAuth, async(req, res) => {
 })
 
 // ----------------------------------- Category and Food Management Routes End ---------------------------------------------------
+
+// ---------------------------------------------- Online-take-away-start ---------------------------------------------
+
+router.get('/takeaway-order/get-incomplete-orders', adminAuth, async(req, res) => {
+    await getAllTakeAwayOrders(req, res);
+});
+
+router.get('/takeaway-order/get-incomplete-orders', adminAuth, async(req, res) => {
+    await getAllInCompletedTakeAwayOrders(req, res);
+});
+
+router.get('/takeaway-order/get-complete-orders', adminAuth, async(req, res) => {
+    await getAllCompletedTakeAwayOrders(req, res);
+});
+
+//  ---------------------------------------------- Online-take-away-end ----------------------------------------
+
 
 module.exports = router;
