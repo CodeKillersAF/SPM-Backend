@@ -80,10 +80,32 @@ const getOneCategory = async(req, res) => {
 /**
  * update category foodItem array
  */
- const updateCategory = async(req, id, res) => {
+ const updateCategory = async(req, res) => {
     try {
-        if(req.body, id) {                         //$addToSet
-            await Category.findByIdAndUpdate(id, { $addToSet: req.body })
+        if(req.body, req.params.id) {                         //$addToSet
+            await Category.findByIdAndUpdate(req.params.id, { $addToSet: req.body })
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                });
+        }
+        else {
+            console.log('No body or params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
+
+/**
+ * update category foodItem array
+ */
+ const updateCategoryAfterDelete = async(req, res) => {
+    try {
+        if(req.body, req.params.id) {                         //$addToSet
+            await Category.findByIdAndUpdate(req.params.id, { $set: req.body })
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -102,10 +124,10 @@ const getOneCategory = async(req, res) => {
 /**
  * update category
  */
- const updateCategoryName = async(req, id, res) => {
+ const updateCategoryName = async(req, res) => {
     try {
-        if(req.body, id) {                         //$addToSet
-            await Category.findByIdAndUpdate(id, { $set: req.body })
+        if(req.body, req.params.id) {                         //$addToSet
+            await Category.findByIdAndUpdate(req.params.id, { $set: req.body })
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -150,6 +172,7 @@ module.exports = {
     getFoodsOfCategory,
     updateCategory,
     updateCategoryName,
-    deleteCategory
+    deleteCategory,
+    updateCategoryAfterDelete
 
 }

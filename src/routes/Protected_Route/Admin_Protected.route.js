@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
 
 // category exports
-const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory } = require('../../controllers/category.controller');
+const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, updateCategoryAfterDelete } = require('../../controllers/category.controller');
 
 // food export
 const { addFood, getAllFoods, deleteFood, getOneFood, updateFood } = require('../../controllers/food.controller');
@@ -29,11 +29,15 @@ router.get('/category/own-category/:id', adminAuth, async(req, res) => {
 });
 
 router.put('/category/update-category/:id', adminAuth, async(req, res) => {
-    await updateCategory(req, req.params.id, res);
+    await updateCategory(req, res);
+});
+
+router.put('/category/update-category-delete/:id', adminAuth, async(req, res) => {
+    await updateCategoryAfterDelete(req, res);
 });
 
 router.put('/category/update-category-name/:id', adminAuth, async(req, res) => {
-    await updateCategoryName(req, req.params.id, res);
+    await updateCategoryName(req, res);
 });
 
 router.delete('/category/delete-category/:id', adminAuth, async(req, res) => {

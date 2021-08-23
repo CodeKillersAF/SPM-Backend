@@ -46,7 +46,7 @@ const getAllFoods = async(req, res) => {
  const deleteFood = async(req, res) => {
     try {
         if(req.params.id) {
-            await Food.findOneAndDelete(req.params.id)
+            await Food.findByIdAndDelete(req.params.id)
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
