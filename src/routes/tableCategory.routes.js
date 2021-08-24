@@ -7,6 +7,7 @@ const categoryControllerAPI =()=>{
     router.post("/",categoryController.addTableCategory);
     router.put("/:id",categoryController.updateTableCategory);
     router.delete("/:id",categoryController.removeTableCategory);
+    router.put("/updateMovie/:id",categoryController.updateMovies);
     return router;
 }
 module.exports = categoryControllerAPI;
