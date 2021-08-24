@@ -43,21 +43,37 @@ const updateTableCategory = async (req, res) => {
     res.status(400).json(err);
   }
 };
-
-//remove table category
-const removeTableCategory = async (req, res) => {
+//update movies
+const updateMovies = async (req, res) => {
   try {
-    let tableCategory = await TableCategory.findOneAndRemove({ _id: req.params.id });
+    let tableCategory = await TableCategory.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: {movies:req.body.movies}},
+      { new: true }
+    );
     res.json(tableCategory);
   } catch (err) {
     res.status(400).json(err);
   }
-}
+};
+
+//remove table category
+const removeTableCategory = async (req, res) => {
+  try {
+    let tableCategory = await TableCategory.findOneAndRemove({
+      _id: req.params.id,
+    });
+    res.json(tableCategory);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
 
 module.exports = {
   addTableCategory,
   getTableCategory,
   getAllTableCategory,
   updateTableCategory,
-  removeTableCategory
+  removeTableCategory,
+  updateMovies
 };
