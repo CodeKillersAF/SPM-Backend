@@ -9,7 +9,7 @@ const tableSchema = new mongoose.Schema(
     image: { type: String, required: true },
     width : { type: Number, required: false },
     height : { type: Number, required: false },
-    category: { type: String, required: true },
+    category: { type: mongoose.Schema.Types.ObjectId,ref:"TableCategory",required: true },
     isAvailable: { type: String, required: true , default:true},
   },
   {
