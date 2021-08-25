@@ -10,10 +10,10 @@ const createOnlieneDeliveryOrder = async (req, res) => {
         res.status(201).send({ data: data });
       })
       .catch((error) => {
-        res.status(500).send({ error: error.message });
+        res.status(500).send({ msg: 'lalal' , error: error.message });
       });
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(500).send({msg: 'lolol', error: error.message });
   }
 };
 

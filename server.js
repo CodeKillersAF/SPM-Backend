@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 
 const OnlineTakeAwayEndPoints = require('./src/routes/onlineTakeAway.routes');
+const OnlineDeliveryEndPoints = require('./src/routes/onlineDelivery.routes');
 const tableAPI = require("./src/routes/table.routes");
 const TableCategoryAPI = require("./src/routes/tableCategory.routes.js");
 
@@ -48,7 +49,7 @@ app.use('/api/admin', require('./src/routes/Protected_Route/Admin_Protected.rout
 app.use('/api/admin', require('./src/routes/Register_Routes/Admin_Register.route'));
 
 app.use('/api/online-take-away', OnlineTakeAwayEndPoints());
-app.use('/api/online-delivery', onlineDeliveryEndPoints());
+app.use('/api/online-delivery', OnlineDeliveryEndPoints());
 app.use('/api/table/', tableAPI());
 app.use('/api/tableCategory/', TableCategoryAPI());
 
@@ -57,5 +58,4 @@ app.use('/api/food', FoodAPI());
 
 app.listen(PORT, () => {
   console.log("You are listening to port " + PORT);
-
 });
