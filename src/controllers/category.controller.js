@@ -80,10 +80,10 @@ const getOneCategory = async(req, res) => {
 /**
  * update category foodItem array
  */
- const updateCategory = async(req, id, res) => {
+ const updateCategory = async(req, res) => {
     try {
-        if(req.body, id) {                         //$addToSet
-            await Category.findByIdAndUpdate(id, { $addToSet: req.body })
+        if(req.params.id && req.body) {                         //$addToSet
+            await Category.findByIdAndUpdate(req.params.id, { $addToSet: req.body })
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
