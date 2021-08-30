@@ -24,6 +24,20 @@ const getAllSupplier = async (req, res) => {
         });
 }
 
+const getOneSupplier = async (req, res) => {
+    if (req.params.id) {
+        await Supplier.findById(req.params.id).populate('supplyItems', 'item_name unit_price desc')
+            // await Supplier.find({})
+            .then(data => {
+                res.status(200).send({ supplyItems: data.supplyItems });
+            })
+            .catch(error => {
+                res.status(500).send({ error: error.message });
+            });
+    }
+
+}
+
 const removeSupplier = async (req, res) => {
     if (req.params.id) {
         await Supplier.findByIdAndRemove(req.params.id)
@@ -56,5 +70,5 @@ const updateSupplier = async (req, res) => {
 };
 
 module.exports = {
-    createSupplier, getAllSupplier, removeSupplier, updateSupplier
+    createSupplier, getAllSupplier, removeSupplier, updateSupplier, getOneSupplier
 }
