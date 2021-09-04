@@ -106,11 +106,47 @@ const updateFood = async(req, res) => {
     }
 }
 
+const updateFoodRate = async(req, res) => {
+    try {
+        if(req.body, req.params.id) {                         //$addToSet
+            await Food.findByIdAndUpdate(req.params.id, { $addToSet: req.body })
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                });
+        }
+        else {
+            console.log('No body or params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
+
+/**
+ * find categorie's foods
+ */
+ const getRatesoFFood = async(req, res) => {
+    if(req && req.params.id) {
+        await Food.findById(req.params.id).populate('rate', 'customerName aboutFood starRate')
+            .then((data) => {
+                res.status(200).send({ rate: data.rate });
+            })
+            .catch((error) => {
+                res.status(500).send({ error: error });
+            })
+    }
+}
+
 
 module.exports = {
     addFood,
     getAllFoods,
     deleteFood,
     getOneFood,
-    updateFood
+    updateFood,
+    updateFoodRate,
+    getRatesoFFood
 }

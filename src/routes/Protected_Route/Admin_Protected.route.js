@@ -3,10 +3,10 @@ const { adminAuth } = require('../../controllers/Auth.controller');
 
 
 // category exports
-const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, updateCategoryAfterDelete } = require('../../controllers/category.controller');
-
+const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, updateCategoryAfterDelete, deleteCategoryFood } = require('../../controllers/category.controller');
+const { getAllRate } = require('../../controllers/rate.controller');
 // food export
-const { addFood, getAllFoods, deleteFood, getOneFood, updateFood } = require('../../controllers/food.controller');
+const { addFood, getAllFoods, deleteFood, getOneFood, updateFood, getRatesoFFood } = require('../../controllers/food.controller');
 
 const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTakeAwayOrders } = require('../../controllers/onlineTakeAway.controllers');
 
@@ -48,6 +48,10 @@ router.delete('/category/delete-category/:id', adminAuth, async(req, res) => {
     await deleteCategory(req, res);
 });
 
+router.put('/category/update-array/:id', adminAuth, async(req, res) => {
+    await deleteCategoryFood(req, res);
+})
+
 router.post('/food/add-food', adminAuth, async(req, res) => {
     await addFood(req, res);
 });
@@ -66,7 +70,15 @@ router.get('/food/get-food/:id', adminAuth, async(req, res) => {
 
 router.put('/food/update-food/:id', adminAuth, async(req, res) => {
     await updateFood(req, res);
-})
+});
+
+router.get('/food/food-rate/:id', adminAuth, async(req, res) => {
+    await getRatesoFFood(req, res);
+});
+
+router.get('/food/all-rate', adminAuth, async(req, res) => {
+    await getAllRate(req, res);
+});
 
 // ----------------------------------- Category and Food Management Routes End ---------------------------------------------------
 

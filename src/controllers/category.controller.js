@@ -165,6 +165,21 @@ const deleteCategory = async(req, res) => {
     }
 }
 
+/**
+ * remove ids from category table
+ */
+const deleteCategoryFood = async(req, res) => {
+    try{
+        await Category.update(
+            {_id: req.params.id},
+            {$pull: {foodItems: req.body.foodItem}}
+        );
+        // res.json("removed");
+     } catch (error) {
+        res.send({ error: error.message });
+     };
+}
+
 module.exports = {
     addCategory,
     getAllCategories,
@@ -173,6 +188,6 @@ module.exports = {
     updateCategory,
     updateCategoryName,
     deleteCategory,
-    updateCategoryAfterDelete
-
+    updateCategoryAfterDelete,
+    deleteCategoryFood,
 }

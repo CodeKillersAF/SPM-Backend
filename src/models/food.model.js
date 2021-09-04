@@ -5,7 +5,8 @@ const FoodSchema = new mongoose.Schema({
     foodDescription: { type: String, required: true, trim: true },
     foodPrice: { type: Number, required: true },
     url: { type: String, required: false, trim: true },
-    category: { type: mongoose.Schema.Types.ObjectId, required: false, ref: 'categories' }
+    category: { type: mongoose.Schema.Types.ObjectId, required: false, ref: 'categories' },
+    rate: [{ type: mongoose.Schema.Types.ObjectId, required: false, ref: 'rates' }]
 });
 
 const Food = mongoose.model('foods', FoodSchema);
