@@ -8,6 +8,7 @@ var tableCategorySchema = new Schema(
     name: { type: String, required: true },
     description: { type: String, required: true },
     image: { type: String, required: true },
+    tables :{type : Array, required: true ,ref:"Table"},
   },
   { timestamps: true }
 );
