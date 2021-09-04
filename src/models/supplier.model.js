@@ -12,7 +12,7 @@ const SupplierSchema = new mongoose.Schema({
         trim: true
     },
     contact: {
-        type: Number,
+        type: String,
         required: true
     },
     address: {
