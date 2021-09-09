@@ -13,7 +13,9 @@ const { addFood, getAllFoods, deleteFood, getOneFood, updateFood, getRatesoFFood
 
 const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTakeAwayOrders } = require('../../controllers/onlineTakeAway.controllers');
 
-const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller')
+const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller');
+// offers
+const { getAllOffers, addOffer } = require('../../controllers/offer.controller');
  
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
@@ -114,6 +116,10 @@ router.get('/delivery-order/get-complete-orders', adminAuth, async(req, res) => 
 
 //  ---------------------------------------------- Online-delivery-end ----------------------------------------
 
+
+
+//  ---------------------------------------------- @Author - Kawsikan ----------------------------------------
+
 // Author : Kawsikan Routes for supplier details
 // Get all supplier
 router.get('/supplier', adminAuth, async (req, res) => {
@@ -155,5 +161,18 @@ router.delete('/supply-item/:id', adminAuth, async (req, res) => {
 router.put('/supply-item/:id', adminAuth, async (req, res) => {
     await updateSupplyItem(req, res);
 })
+
+
+// Author : Kawsikan Routes for offer details
+
+// Get all offer item
+router.get('/offer',adminAuth, async(req,res)=>{
+    await getAllOffers(req, res);
+})
+// Add new offer
+router.post('/offer',adminAuth, async(req,res)=>{
+    await addOffer(req, res);
+})
+
 
 module.exports = router;
