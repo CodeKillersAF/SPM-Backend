@@ -1,13 +1,10 @@
-const Food = require('../models/food.model');
+const Offer = require('../models/offer.model');
 
-/**
- * add food
- */
- const addFood = async(req, res) => {
-    try{
-        if(req.body) {
-            const food = new Food(req.body);
-            await food.save()
+const addOffer = async (req, res) => {
+    try {
+        if (req.body) {
+            const offer = new Offer(req.body);
+            await offer.save()
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -24,11 +21,11 @@ const Food = require('../models/food.model');
 }
 
 /**
- * get all foods
+ * get all offers
  */
-const getAllFoods = async(req, res) => {
+const getAllOffers = async (req, res) => {
     try {
-        await Food.find({  })
+        await Offer.find({})
             .then((data) => {
                 res.status(200).send({ data: data });
             })
@@ -41,12 +38,12 @@ const getAllFoods = async(req, res) => {
 }
 
 /**
- * delete food
+ * delete offer
  */
- const deleteFood = async(req, res) => {
+const deleteOffer = async (req, res) => {
     try {
-        if(req.params.id) {
-            await Food.findByIdAndDelete(req.params.id)
+        if (req.params.id) {
+            await Offer.findByIdAndDelete(req.params.id)
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -63,12 +60,12 @@ const getAllFoods = async(req, res) => {
 }
 
 /**
- * get one food
+ * get one offer
  */
- const getOneFood = async(req, res) => {
+const getOneOffer = async (req, res) => {
     try {
-        if(req.params.id) {
-            await Food.findById(req.params.id)
+        if (req.params.id) {
+            await Offer.findById(req.params.id)
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -85,12 +82,12 @@ const getAllFoods = async(req, res) => {
 }
 
 /**
- * update food
+ * update offer
  */
-const updateFood = async(req, res) => {
+const updateOffer = async (req, res) => {
     try {
-        if(req.body, req.params.id) {
-            await Food.findByIdAndUpdate(req.params.id, { $set: req.body })
+        if (req.body, req.params.id) {
+            await Offer.findByIdAndUpdate(req.params.id, { $set: req.body })
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -103,50 +100,10 @@ const updateFood = async(req, res) => {
         }
     } catch (error) {
         res.send({ error: error.message });
-    }
-}
-
-const updateFoodRate = async(req, res) => {
-    try {
-        if(req.body, req.params.id) {                         //$addToSet
-            await Food.findByIdAndUpdate(req.params.id, { $addToSet: req.body })
-                .then((data) => {
-                    res.status(200).send({ data: data });
-                })
-                .catch((error) => {
-                    res.status(500).send({ error: error });
-                });
-        }
-        else {
-            console.log('No body or params id');
-        }
-    } catch (error) {
-        res.send({ error: error.message });
-    }
-}
-
-/**
- * find categorie's foods
- */
- const getRatesoFFood = async(req, res) => {
-    if(req && req.params.id) {
-        await Food.findById(req.params.id).populate('rate', 'customerName aboutFood starRate')
-            .then((data) => {
-                res.status(200).send({ rate: data.rate });
-            })
-            .catch((error) => {
-                res.status(500).send({ error: error });
-            })
     }
 }
 
 
 module.exports = {
-    addFood,
-    getAllFoods,
-    deleteFood,
-    getOneFood,
-    updateFood,
-    updateFoodRate,
-    getRatesoFFood
+    addOffer, getAllOffers, deleteOffer, getOneOffer, updateOffer
 }

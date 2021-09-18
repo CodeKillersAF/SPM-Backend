@@ -6,14 +6,16 @@ const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem }
 
 
 // category exports
-const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory } = require('../../controllers/category.controller');
-
+const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, deleteCategoryFood } = require('../../controllers/category.controller');
+const { getAllRate } = require('../../controllers/rate.controller');
 // food export
-const { addFood, getAllFoods, deleteFood, getOneFood, updateFood } = require('../../controllers/food.controller');
+const { addFood, getAllFoods, deleteFood, getOneFood, updateFood, getRatesoFFood } = require('../../controllers/food.controller');
 
 const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTakeAwayOrders } = require('../../controllers/onlineTakeAway.controllers');
 
-const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller')
+const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller');
+// offers
+const { getAllOffers, addOffer } = require('../../controllers/offer.controller');
  
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
@@ -38,16 +40,20 @@ router.get('/category/own-category/:id', adminAuth, async(req, res) => {
 });
 
 router.put('/category/update-category/:id', adminAuth, async(req, res) => {
-    await updateCategory(req,res);
+    await updateCategory(req, res);
 });
 
 router.put('/category/update-category-name/:id', adminAuth, async(req, res) => {
-    await updateCategoryName(req, req.params.id, res);
+    await updateCategoryName(req, res);
 });
 
 router.delete('/category/delete-category/:id', adminAuth, async(req, res) => {
     await deleteCategory(req, res);
 });
+
+router.put('/category/update-array/:id', adminAuth, async(req, res) => {
+    await deleteCategoryFood(req, res);
+})
 
 router.post('/food/add-food', adminAuth, async(req, res) => {
     await addFood(req, res);
@@ -67,7 +73,15 @@ router.get('/food/get-food/:id', adminAuth, async(req, res) => {
 
 router.put('/food/update-food/:id', adminAuth, async(req, res) => {
     await updateFood(req, res);
-})
+});
+
+router.get('/food/food-rate/:id', adminAuth, async(req, res) => {
+    await getRatesoFFood(req, res);
+});
+
+router.get('/food/all-rate', adminAuth, async(req, res) => {
+    await getAllRate(req, res);
+});
 
 // ----------------------------------- Category and Food Management Routes End ---------------------------------------------------
 
@@ -101,6 +115,10 @@ router.get('/delivery-order/get-complete-orders', adminAuth, async(req, res) => 
 });
 
 //  ---------------------------------------------- Online-delivery-end ----------------------------------------
+
+
+
+//  ---------------------------------------------- @Author - Kawsikan ----------------------------------------
 
 // Author : Kawsikan Routes for supplier details
 // Get all supplier
@@ -143,5 +161,18 @@ router.delete('/supply-item/:id', adminAuth, async (req, res) => {
 router.put('/supply-item/:id', adminAuth, async (req, res) => {
     await updateSupplyItem(req, res);
 })
+
+
+// Author : Kawsikan Routes for offer details
+
+// Get all offer item
+router.get('/offer',adminAuth, async(req,res)=>{
+    await getAllOffers(req, res);
+})
+// Add new offer
+router.post('/offer',adminAuth, async(req,res)=>{
+    await addOffer(req, res);
+})
+
 
 module.exports = router;

@@ -13,6 +13,8 @@ const TableCategoryAPI = require("./src/routes/tableCategory.routes.js");
 const TableBookAPI = require("./src/routes/tableBook.routes.js");
 const CategoryAPI = require('./src/routes/FoodCategory.route');
 const FoodAPI = require('./src/routes/Food.route');
+const RateAPI = require('./src/routes/rate.route');
+const OfferAPI = require('./src/routes/Offer.route')
 
 const app = express();
 app.use(cors());
@@ -56,6 +58,8 @@ app.use('/api/tableCategory/', TableCategoryAPI());
 app.use('/api/tableBook/', TableBookAPI());
 app.use('/api/category', CategoryAPI());
 app.use('/api/food', FoodAPI());
+app.use('/api/rate', RateAPI());
+app.use('/api/offer',OfferAPI());
 
 app.listen(PORT, () => {
   console.log("You are listening to port " + PORT);

@@ -82,7 +82,7 @@ const getOneCategory = async(req, res) => {
  */
  const updateCategory = async(req, res) => {
     try {
-        if(req.params.id && req.body) {                         //$addToSet
+        if(req.body, req.params.id) {                         //$addToSet
             await Category.findByIdAndUpdate(req.params.id, { $addToSet: req.body })
                 .then((data) => {
                     res.status(200).send({ data: data });
@@ -102,10 +102,10 @@ const getOneCategory = async(req, res) => {
 /**
  * update category
  */
- const updateCategoryName = async(req, id, res) => {
+ const updateCategoryName = async(req, res) => {
     try {
-        if(req.body, id) {                         //$addToSet
-            await Category.findByIdAndUpdate(id, { $set: req.body })
+        if(req.body, req.params.id) {                         //$addToSet
+            await Category.findByIdAndUpdate(req.params.id, { $set: req.body })
                 .then((data) => {
                     res.status(200).send({ data: data });
                 })
@@ -143,6 +143,21 @@ const deleteCategory = async(req, res) => {
     }
 }
 
+/**
+ * remove ids from category table
+ */
+const deleteCategoryFood = async(req, res) => {
+    try{
+        await Category.update(
+            {_id: req.params.id},
+            {$pull: {foodItems: req.body.foodItem}}
+        );
+        // res.json("removed");
+     } catch (error) {
+        res.send({ error: error.message });
+     };
+}
+
 module.exports = {
     addCategory,
     getAllCategories,
@@ -150,6 +165,6 @@ module.exports = {
     getFoodsOfCategory,
     updateCategory,
     updateCategoryName,
-    deleteCategory
-
+    deleteCategory,
+    deleteCategoryFood,
 }
