@@ -2,8 +2,8 @@ const SupplyRecord = require('../models/supplyRecord.model');
 
 const createSupplyRecord = async (req, res) => {
     if (req.body) {
-        const SupplyRecord = new Supplier(req.body);
-        await SupplyRecord.save()
+        const supplyRecord = new SupplyRecord(req.body);
+        await supplyRecord.save()
             .then(data => {
                 res.status(200).send({ data: data });
             })

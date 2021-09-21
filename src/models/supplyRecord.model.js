@@ -17,17 +17,19 @@ const SupplyRecordSchema = new mongoose.Schema({
     },
     qty: {
         type: Number,
-        required: true,
-        trim: true
+        required: true
     },
     unit_price: {
         type: Number,
-        required: true,
-        trim: true
+        required: true
     },
     total_price: {
         type: Number,
-        required: true,
+        required: false
+    },
+    url: {
+        type: String,
+        required: false,
         trim: true
     }
 
