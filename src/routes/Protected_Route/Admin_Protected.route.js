@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
 const { getAllSupplier, createSupplier, removeSupplier, updateSupplier, getOneSupplier } = require('../../controllers/supplier.controller');
-const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem } = require('../../controllers/supplyItem.controller');
+const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem, getOneItem } = require('../../controllers/supplyItem.controller');
 
 
 
@@ -145,7 +145,6 @@ router.get('/supplier/:id', adminAuth, async (req, res) => {
 })
 
 
-
 // Author : Kawsikan Routes for supplier details
 // Get all supply item
 router.get('/supply-item', adminAuth, async (req, res) => {
@@ -162,6 +161,10 @@ router.delete('/supply-item/:id', adminAuth, async (req, res) => {
 // Update supply item
 router.put('/supply-item/:id', adminAuth, async (req, res) => {
     await updateSupplyItem(req, res);
+})
+
+router.get('/supply-item/:id', adminAuth, async (req, res) => {
+    await getOneItem(req, res);
 })
 
 

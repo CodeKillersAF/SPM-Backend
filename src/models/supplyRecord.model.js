@@ -27,6 +27,10 @@ const SupplyRecordSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
+    bill_amount: {
+        type: Number,
+        required: false
+    },
     url: {
         type: String,
         required: false,
