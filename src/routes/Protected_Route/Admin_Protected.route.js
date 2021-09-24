@@ -16,6 +16,8 @@ const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTa
 const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller');
 // offers
 const { getAllOffers, addOffer } = require('../../controllers/offer.controller');
+// Supply record
+const { createSupplyRecord, getAllSupplyRecord } = require('../../controllers/supplyRecord.controller');
  
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
@@ -174,5 +176,15 @@ router.post('/offer',adminAuth, async(req,res)=>{
     await addOffer(req, res);
 })
 
+// Author : Kawsikan Routes for supply record
+
+// Add new supply record
+router.post('/supply-record',adminAuth, async(req,res)=>{
+    await createSupplyRecord(req,res);
+})
+
+router.get('/supply-record',adminAuth, async(req,res)=>{
+    await getAllSupplyRecord(req,res);
+})
 
 module.exports = router;
