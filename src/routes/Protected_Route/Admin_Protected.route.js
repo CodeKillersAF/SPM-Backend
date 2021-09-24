@@ -1,15 +1,20 @@
 const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
+const { getAllSupplier, createSupplier, removeSupplier, updateSupplier, getOneSupplier } = require('../../controllers/supplier.controller');
+const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem } = require('../../controllers/supplyItem.controller');
+
 
 
 // category exports
-const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, updateCategoryAfterDelete, deleteCategoryFood } = require('../../controllers/category.controller');
+const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, deleteCategoryFood } = require('../../controllers/category.controller');
 const { getAllRate } = require('../../controllers/rate.controller');
 // food export
 const { addFood, getAllFoods, deleteFood, getOneFood, updateFood, getRatesoFFood } = require('../../controllers/food.controller');
 
 const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTakeAwayOrders } = require('../../controllers/onlineTakeAway.controllers');
 
+const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller')
+ 
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
     return res.send("Welcome Admin");
@@ -34,10 +39,6 @@ router.get('/category/own-category/:id', adminAuth, async(req, res) => {
 
 router.put('/category/update-category/:id', adminAuth, async(req, res) => {
     await updateCategory(req, res);
-});
-
-router.put('/category/update-category-delete/:id', adminAuth, async(req, res) => {
-    await updateCategoryAfterDelete(req, res);
 });
 
 router.put('/category/update-category-name/:id', adminAuth, async(req, res) => {
@@ -84,7 +85,7 @@ router.get('/food/all-rate', adminAuth, async(req, res) => {
 
 // ---------------------------------------------- Online-take-away-start ---------------------------------------------
 
-router.get('/takeaway-order/get-incomplete-orders', adminAuth, async(req, res) => {
+router.get('/takeaway-order/get-all-orders', adminAuth, async(req, res) => {
     await getAllTakeAwayOrders(req, res);
 });
 
@@ -98,5 +99,61 @@ router.get('/takeaway-order/get-complete-orders', adminAuth, async(req, res) => 
 
 //  ---------------------------------------------- Online-take-away-end ----------------------------------------
 
+// ---------------------------------------------- Online-delivery-start ----------------------------------------
+router.get('/delivery-order/get-all-orders', adminAuth, async(req, res) => {
+    await getAllDeliveryOrders(req, res);
+});
+
+router.get('/delivery-order/get-incomplete-orders', adminAuth, async(req, res) => {
+    await getAllInCompletedDeliveryOrders(req, res);
+});
+
+router.get('/delivery-order/get-complete-orders', adminAuth, async(req, res) => {
+    await getAllCompletedDeliveryOrders(req, res);
+});
+
+//  ---------------------------------------------- Online-delivery-end ----------------------------------------
+
+// Author : Kawsikan Routes for supplier details
+// Get all supplier
+router.get('/supplier', adminAuth, async (req, res) => {
+    await getAllSupplier(req, res);
+})
+// Add new supplier
+router.post('/supplier', adminAuth, async (req, res) => {
+    await createSupplier(req, res);
+})
+// Remove an existing supplier
+router.delete('/supplier/:id', adminAuth, async (req, res) => {
+    await removeSupplier(req, res);
+})
+// Update supplier
+router.put('/supplier/:id', adminAuth, async (req, res) => {
+    await updateSupplier(req, res);
+})
+// View item under supplier
+router.get('/supplier/:id', adminAuth, async (req, res) => {
+    await getOneSupplier(req, res);
+})
+
+
+
+// Author : Kawsikan Routes for supplier details
+// Get all supply item
+router.get('/supply-item', adminAuth, async (req, res) => {
+    await getAllSupplyItem(req, res);
+})
+// Add new supplier
+router.post('/supply-item', adminAuth, async (req, res) => {
+    await createSupplyItem(req, res);
+})
+// Remove an existing supply item
+router.delete('/supply-item/:id', adminAuth, async (req, res) => {
+    await removeSupplyItem(req, res);
+})
+// Update supply item
+router.put('/supply-item/:id', adminAuth, async (req, res) => {
+    await updateSupplyItem(req, res);
+})
 
 module.exports = router;

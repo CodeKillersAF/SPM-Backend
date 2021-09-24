@@ -43,21 +43,50 @@ const updateTableCategory = async (req, res) => {
     res.status(400).json(err);
   }
 };
-
-//remove table category
-const removeTableCategory = async (req, res) => {
+//update tables
+const updateTables = async (req, res) => {
   try {
-    let tableCategory = await TableCategory.findOneAndRemove({ _id: req.params.id });
+    let tableCategory = await TableCategory.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: {tables:req.body.table}},
+      { new: true }
+    );
     res.json(tableCategory);
   } catch (err) {
     res.status(400).json(err);
   }
-}
+};
+
+//remove table category
+const removeTableCategory = async (req, res) => {
+  try {
+    let tableCategory = await TableCategory.findOneAndRemove({
+      _id: req.params.id,
+    });
+    res.json(tableCategory);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+//remove tables
+const removeTables = async (req, res) => {
+  try {
+    let tableCategory = await TableCategory.update(
+      { _id: req.params.id },
+      { $pull: {tables:req.body.table}},
+    );
+    res.json("removed");
+  } catch (err) {
+    res.status(400).json(err.message);
+  }
+};
 
 module.exports = {
   addTableCategory,
   getTableCategory,
   getAllTableCategory,
   updateTableCategory,
-  removeTableCategory
+  removeTableCategory,
+  updateTables,
+  removeTables,
 };
