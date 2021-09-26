@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { adminAuth } = require('../../controllers/Auth.controller');
-const { getAllSupplier, createSupplier, removeSupplier, updateSupplier, getOneSupplier } = require('../../controllers/supplier.controller');
+const { getAllSupplier, createSupplier, removeSupplier, updateSupplier, getOneSupplier, getOneSupplierForRecord } = require('../../controllers/supplier.controller');
 const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem, getOneItem } = require('../../controllers/supplyItem.controller');
 
 
@@ -142,6 +142,10 @@ router.put('/supplier/:id', adminAuth, async (req, res) => {
 // View item under supplier
 router.get('/supplier/:id', adminAuth, async (req, res) => {
     await getOneSupplier(req, res);
+})
+
+router.get('/supplier-r/:id', adminAuth, async (req, res) => {
+    await getOneSupplierForRecord(req, res);
 })
 
 
