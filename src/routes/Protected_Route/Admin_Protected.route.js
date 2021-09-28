@@ -3,8 +3,6 @@ const { adminAuth } = require('../../controllers/Auth.controller');
 const { getAllSupplier, createSupplier, removeSupplier, updateSupplier, getOneSupplier, getOneSupplierForRecord } = require('../../controllers/supplier.controller');
 const { getAllSupplyItem, createSupplyItem, removeSupplyItem, updateSupplyItem, getOneItem } = require('../../controllers/supplyItem.controller');
 
-
-
 // category exports
 const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updateCategory, updateCategoryName, deleteCategory, deleteCategoryFood } = require('../../controllers/category.controller');
 const { getAllRate } = require('../../controllers/rate.controller');
@@ -17,7 +15,7 @@ const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedD
 // offers
 const { getAllOffers, addOffer } = require('../../controllers/offer.controller');
 // Supply record
-const { createSupplyRecord, getAllSupplyRecord } = require('../../controllers/supplyRecord.controller');
+const { createSupplyRecord, getAllSupplyRecord, sendMailUser } = require('../../controllers/supplyRecord.controller');
  
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
@@ -192,6 +190,10 @@ router.post('/supply-record',adminAuth, async(req,res)=>{
 
 router.get('/supply-record',adminAuth, async(req,res)=>{
     await getAllSupplyRecord(req,res);
-})
+});
+
+router.post('/supply-record/email',adminAuth, async(req,res)=>{
+    await sendMailUser(req,res);
+});
 
 module.exports = router;
