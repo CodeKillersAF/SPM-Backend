@@ -1,11 +1,11 @@
-const tableBook = require('../models/tableBook.model');
+const TableBook = require('../models/tableBook.model');
 
 
 // add a new tableBook
 const addTableBook = (req, res) => {
 
     // Create a new tableBook
-    const tableBook = new tableBook(req.body);
+    const tableBook = new TableBook(req.body);
 
     // Save tableBook in the database
     tableBook.save()
@@ -20,7 +20,7 @@ const addTableBook = (req, res) => {
 
 // Retrieve and return all tableBooks from the database.
 const findAllTableBooks = (req, res) => {
-    tableBook.find()
+    TableBook.find()
         .then(tableBooks => {
             res.send(tableBooks);
         }).catch(err => {
@@ -32,7 +32,7 @@ const findAllTableBooks = (req, res) => {
 
 // Find a single tableBook with a tableBookId
 const findOneTableBook = (req, res) => {
-    tableBook.findById(req.params.tableBookId)
+    TableBook.findById(req.params.tableBookId)
         .then(tableBook => {
             if (!tableBook) {
                 return res.status(404).send({
@@ -55,17 +55,16 @@ const findOneTableBook = (req, res) => {
 // Update a tableBook identified by the tableBookId in the request
 const updateTableBook = (req, res) => {
     // Validate Request
-    if (!req.body.content) {
+    if (!req.body) {
         return res.status(400).send({
             message: "tableBook content can not be empty"
         });
     }
 
     // Find tableBook and update it with the request body
-    tableBook.findByIdAndUpdate(req.params.tableBookId, {
-        title: req.body.title || "Untitled Note",
-        content: req.body.content
-    }, { new: true })
+    TableBook.findByIdAndUpdate(req.params.id, 
+        { $set: req.body },
+        { new: true })
         .then(tableBook => {
             if (!tableBook) {
                 return res.status(404).send({
@@ -87,22 +86,22 @@ const updateTableBook = (req, res) => {
 
 // Delete a tableBook with the specified tableBookId in the request
 const deleteTableBook = (req, res) => {
-    tableBook.findByIdAndRemove(req.params.tableBookId)
+    TableBook.findByIdAndRemove(req.params.id)
         .then(tableBook => {
             if (!tableBook) {
                 return res.status(404).send({
-                    message: "tableBook not found with id " + req.params.tableBookId
+                    message: "tableBook not found with id " + req.params.id
                 });
             }
             res.send({ message: "tableBook deleted successfully!" });
         }).catch(err => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
-                    message: "tableBook not found with id " + req.params.tableBookId
+                    message: "tableBook not found with id " + req.params.id
                 });
             }
             return res.status(500).send({
-                message: "Could not delete tableBook with id " + req.params.tableBookId
+                message: "Could not delete tableBook with id " + req.params.id
             });
         });
 }
