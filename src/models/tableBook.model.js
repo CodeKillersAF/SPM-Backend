@@ -13,6 +13,7 @@ const tableBookSchema = new Schema({
     extraPrice: {type: Number, default: 0},
     date : {type: Date, required: true},
     time : {type: Date, required: true},
+    status :{ type :Boolean, default: false},
 });
 
 
