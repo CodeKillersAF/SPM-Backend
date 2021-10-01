@@ -87,6 +87,12 @@ const getAllInCompletedDeliveryOrders = async (req, res) => {
   }
 };
 
+/**
+ * This function is using to get all the completed delivery orders
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 const getAllCompletedDeliveryOrders = async (req, res) => {
   try {
     await OnlineDelivery.find({ is_completed: true })
