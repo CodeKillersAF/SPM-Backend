@@ -23,7 +23,53 @@ const getAllSupplyItem = async (req, res) => {
         });
 }
 
+const removeSupplyItem = async (req, res) => {
+    if (req.params.id) {
+        await SupplyItem.findByIdAndRemove(req.params.id)
+            .then((data) => {
+                res.status(200).send({ data: data });
+            })
+            .catch((error) => {
+                res.status(500).send(error.message);
+            });
+    }
+};
+
+const updateSupplyItem = async (req, res) => {
+    if (req.params.id && req.body) {
+        await SupplyItem.findByIdAndUpdate(req.params.id, {
+            item_name: req.body.item_name,
+            unit_price: req.body.unit_price,
+            desc: req.body.desc
+        })
+            .then((data) => {
+                res.status(200).send({ data: data });
+            })
+            .catch((err) => {
+                res.status(500).send({ err: err.message });
+            });
+    }
+};
+
+const getOneItem = async(req, res) => {
+    try {
+        if(req.params.id) {
+            await SupplyItem.findById(req.params.id)
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                })
+        }
+        else {
+            console.log('No params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
 
 module.exports = {
-    createSupplyItem, getAllSupplyItem
+    createSupplyItem, getAllSupplyItem, removeSupplyItem, updateSupplyItem, getOneItem
 }
