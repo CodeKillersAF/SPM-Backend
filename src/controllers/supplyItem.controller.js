@@ -51,6 +51,25 @@ const updateSupplyItem = async (req, res) => {
     }
 };
 
+const getOneItem = async(req, res) => {
+    try {
+        if(req.params.id) {
+            await SupplyItem.findById(req.params.id)
+                .then((data) => {
+                    res.status(200).send({ data: data });
+                })
+                .catch((error) => {
+                    res.status(500).send({ error: error });
+                })
+        }
+        else {
+            console.log('No params id');
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+}
+
 module.exports = {
-    createSupplyItem, getAllSupplyItem, removeSupplyItem, updateSupplyItem
+    createSupplyItem, getAllSupplyItem, removeSupplyItem, updateSupplyItem, getOneItem
 }
