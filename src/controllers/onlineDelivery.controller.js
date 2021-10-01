@@ -65,6 +65,14 @@ const deleteOneOnlineDeliveryOrder = async (req, res) => {
   }
 };
 
+/**
+ * This function is using to update the status of delivery order
+ * 
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 const getAllInCompletedDeliveryOrders = async (req, res) => {
   try {
     await OnlineDelivery.find({ is_completed: false })
