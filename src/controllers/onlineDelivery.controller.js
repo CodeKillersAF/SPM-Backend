@@ -5,6 +5,8 @@ const OnlineDelivery = require("../models/onlineDelivery.models");
  * 
  * @param {*} req 
  * @param {*} res 
+ * 
+ * @returns void
  */
 const createOnlieneDeliveryOrder = async (req, res) => {
   try {
@@ -22,7 +24,12 @@ const createOnlieneDeliveryOrder = async (req, res) => {
   }
 };
 
-//Get all online delivery orders
+/**
+ * This function is using to get all delivery orders
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 const getAllDeliveryOrders = async (req, res) => {
   await OnlineDelivery.find({})
     .then((data) => {
