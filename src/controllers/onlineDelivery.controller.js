@@ -1,6 +1,11 @@
 const OnlineDelivery = require("../models/onlineDelivery.models");
-
-//Set Online takeaway delivery order
+/**
+ * This function is using to create deilvery order
+ * 
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 const createOnlieneDeliveryOrder = async (req, res) => {
   try {
     const onlineDeliveryOrder = new OnlineDelivery(req.body);
@@ -10,10 +15,10 @@ const createOnlieneDeliveryOrder = async (req, res) => {
         res.status(201).send({ data: data });
       })
       .catch((error) => {
-        res.status(500).send({ msg: 'lalal' , error: error.message });
+        res.status(500).send({ msg: "lalal", error: error.message });
       });
   } catch (error) {
-    res.status(500).send({msg: 'lolol', error: error.message });
+    res.status(500).send({ msg: "lolol", error: error.message });
   }
 };
 
@@ -46,39 +51,73 @@ const deleteOneOnlineDeliveryOrder = async (req, res) => {
   }
 };
 
-const getAllInCompletedDeliveryOrders = async (req,res) => {
-    try{
-        await OnlineDelivery.find({is_completed: false })
-        .then((data) => {
-            res.status(200).send({data: data});
-        })
-        .catch(error => {
-            res.status(500).send({error: error.message});
-        })
-    } catch (error) {
-        res.status(500).send({error: error.message});    
-    } 
+const getAllInCompletedDeliveryOrders = async (req, res) => {
+  try {
+    await OnlineDelivery.find({ is_completed: false })
+      .then((data) => {
+        res.status(200).send({ data: data });
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
 
-}
+const getAllCompletedDeliveryOrders = async (req, res) => {
+  try {
+    await OnlineDelivery.find({ is_completed: true })
+      .then((data) => {
+        res.status(200).send({ data: data });
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
 
-const getAllCompletedDeliveryOrders = async (req,res) => {
-    try{
-        await OnlineDelivery.find({is_completed: true })
+const setDeliveryOrderAsCompleted = async (req, res) => {
+  try {
+    if (req.params.id) {
+      await OnlineDelivery.updateOne(
+        { _id: req.params.id },
+        { is_completed: true }
+      )
         .then((data) => {
-            res.status(200).send({data: data});
+          res.status(200).send({ data: data });
         })
-        .catch(error => {
-            res.status(500).send({error: error.message});
-        })
-    } catch (error) {
-        res.status(500).send({error: error.message});    
-    } 
-}
+        .catch((error) => {
+          res.status(500).send({ error: error.message });
+        });
+    }
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+const deleteCompletedDeliveryOrder = async (req, res) => {
+  try {
+    await OnlineDelivery.findByIdAndDelete(req.params.id)
+      .then((data) => {
+        res.status(200).send({ data: data });
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
 
 module.exports = {
   createOnlieneDeliveryOrder,
   getAllDeliveryOrders,
   deleteOneOnlineDeliveryOrder,
   getAllInCompletedDeliveryOrders,
-  getAllCompletedDeliveryOrders
+  getAllCompletedDeliveryOrders,
+  setDeliveryOrderAsCompleted,
+  deleteCompletedDeliveryOrder,
 };

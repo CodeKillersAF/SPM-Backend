@@ -8,10 +8,11 @@ const { addCategory, getAllCategories, getOneCategory, getFoodsOfCategory, updat
 // food export
 const { addFood, getAllFoods, deleteFood, getOneFood, updateFood } = require('../../controllers/food.controller');
 
-const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTakeAwayOrders } = require('../../controllers/onlineTakeAway.controllers');
+const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTakeAwayOrders, setTakeAwayOrderAsCompleted, deleteCompletedTakeAwayOrder } = require('../../controllers/onlineTakeAway.controllers');
 
-const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller')
+const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders, setDeliveryOrderAsCompleted, deleteCompletedDeliveryOrder } = require('../../controllers/onlineDelivery.controller')
  
+const { emailSender } = require('../../controllers/email.controller')
 
 router.get('/admin-protected', adminAuth, async(req, res) => {
     return res.send("Welcome Admin");
@@ -82,6 +83,15 @@ router.get('/takeaway-order/get-complete-orders', adminAuth, async(req, res) => 
     await getAllCompletedTakeAwayOrders(req, res);
 });
 
+router.put('/takeaway-order/set-as-completed/:id', adminAuth, async(req, res) => {
+    await setTakeAwayOrderAsCompleted(req, res);
+});
+
+router.delete('/takeaway-order/delete-complete/:id', adminAuth, async(req, res) => {
+    await deleteCompletedTakeAwayOrder(req, res);
+});
+
+
 //  ---------------------------------------------- Online-take-away-end ----------------------------------------
 
 // ---------------------------------------------- Online-delivery-start ----------------------------------------
@@ -97,6 +107,18 @@ router.get('/delivery-order/get-complete-orders', adminAuth, async(req, res) => 
     await getAllCompletedDeliveryOrders(req, res);
 });
 
+router.put('/delivery-order/set-as-completed/:id', adminAuth, async(req, res) => {
+    await setDeliveryOrderAsCompleted(req, res);
+});
+
+router.delete('/delivery-order/delete-complete/:id', adminAuth, async(req, res) => {
+    await deleteCompletedDeliveryOrder(req, res);
+});
 //  ---------------------------------------------- Online-delivery-end ----------------------------------------
+
+//  ---------------------------------------------- Send Emails ----------------------------------------
+router.post('/send-mail', adminAuth, async(req, res) => {
+    await emailSender(req, res);
+});
 
 module.exports = router;
