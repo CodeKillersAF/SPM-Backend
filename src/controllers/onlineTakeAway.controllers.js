@@ -130,6 +130,38 @@ const getAllInCompletedTakeAwayOrders = async (req,res) => {
   }
 };
 
+const setTakeAwayOrderAsCompleted = async (req, res) => {
+  try {
+    if (req.params.id) {
+      await OnlineTakeAway.updateOne({_id : req.params.id},{is_completed:true})
+        .then((data) => {
+          res.status(200).send({ data: data });
+        })
+        .catch((error) => {
+          res.status(500).send({ error: error.message });
+        });
+    }
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+const deleteCompletedTakeAwayOrder = async (req, res) => {
+  try {
+    await OnlineTakeAway.findByIdAndDelete(req.params.id)
+      .then((data) => {
+        res.status(200).send({ data: data });
+      })
+      .catch((error) => {
+        res.status(500).send({ error: error.message });
+      });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+
+
 
 
 module.exports = {
@@ -139,5 +171,7 @@ module.exports = {
   getAllTakeAwayOrders,
   getAllCompletedTakeAwayOrders,
   getAllInCompletedTakeAwayOrders,
-  updateOnelineTakeAwayOrder
+  updateOnelineTakeAwayOrder,
+  setTakeAwayOrderAsCompleted,
+  deleteCompletedTakeAwayOrder
 };
