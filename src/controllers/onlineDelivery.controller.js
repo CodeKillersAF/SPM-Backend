@@ -40,6 +40,13 @@ const getAllDeliveryOrders = async (req, res) => {
     });
 };
 
+
+/**
+ * This function is using to delete one delivery order
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 const deleteOneOnlineDeliveryOrder = async (req, res) => {
   try {
     if (req.params.id) {
