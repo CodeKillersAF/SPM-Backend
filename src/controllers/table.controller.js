@@ -1,12 +1,17 @@
-
 const Table = require("../models/table.model");
 
 //add table
 const createTable = async (req, res) => {
   try {
-    const table = new Table(req.body);
-    await table.save();
-    res.status(200).json(table);
+    if (req.body.image) {
+      const table = new Table(req.body);
+      await table.save();
+      res.status(200).json(table);
+    } else {
+      return res.status(400).json({
+        message: "Image is required",
+      });
+    }
   } catch (err) {
     res.status(400).json(err);
   }
@@ -28,7 +33,7 @@ const removeTable = async (req, res) => {
 //get all tables
 const getAllTables = async (req, res) => {
   try {
-    const tables = await Table.find({}).populate("TableCategory","name");
+    const tables = await Table.find({}).populate("TableCategory", "name");
     res.status(200).json(tables);
   } catch (err) {
     res.status(500).send(err);
@@ -89,11 +94,12 @@ const updateTableStatus = async (req, res) => {
   }
 };
 
+
 module.exports = {
   createTable,
   removeTable,
   getAllTables,
   updateTable,
   getTableById,
-  updateTableStatus
+  updateTableStatus,
 };

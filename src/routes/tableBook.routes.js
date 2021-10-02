@@ -9,6 +9,8 @@ const tableBookRoutes = function (app) {
     router.post('/', tableBookController.addTableBook);
     router.put('/:id', tableBookController.updateTableBook);
     router.delete('/:id', tableBookController.deleteTableBook);
+    router.get('/popular', tableBookController.getMostReservatedTableBook);
+    router.post('/sendEmail', tableBookController.sendEmail);
 
     return router;
 }

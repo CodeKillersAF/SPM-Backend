@@ -30,6 +30,7 @@ const getAllTableCategory = async (req, res) => {
   }
 };
 
+
 //update table category
 const updateTableCategory = async (req, res) => {
   try {
