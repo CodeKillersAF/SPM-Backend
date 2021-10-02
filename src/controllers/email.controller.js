@@ -18,7 +18,7 @@ const emailSender = async (req,res) => {
             from: 'hashenhshamika@gmail.com',
             to: req.body.to,
             subject: 'SPM',
-            text: 'total price : ' + req.body.total_price
+            text: 'Total Price : ' + req.body.total_price
           };
 
           transporter.sendMail(mailOptions, function(error, info){
