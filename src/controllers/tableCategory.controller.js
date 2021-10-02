@@ -30,6 +30,7 @@ const getAllTableCategory = async (req, res) => {
   }
 };
 
+
 //update table category
 const updateTableCategory = async (req, res) => {
   try {
@@ -80,6 +81,7 @@ const removeTables = async (req, res) => {
     res.status(400).json(err.message);
   }
 };
+
 
 module.exports = {
   addTableCategory,
