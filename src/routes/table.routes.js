@@ -8,10 +8,10 @@ const TableAPI = () => {
 
 router.get("/allTable", controller.getAllTables);
 router.get("/allTable/:id", controller.getTableById);
-router.put("/updateTableStatus/:id", controller.updateTableStatus);
-router.post("/createTable", controller.createTable); //admin routes
-router.put("/updateTable/:id", controller.updateTable); //admin routes
-router.delete("/removeTable/:id", controller.removeTable); //admin routes
+// router.put("/updateTableStatus/:id", controller.updateTableStatus);
+// router.post("/createTable", controller.createTable); 
+// router.put("/updateTable/:id", controller.updateTable);
+// router.delete("/removeTable/:id", controller.removeTable); 
 
 return router;
 }
