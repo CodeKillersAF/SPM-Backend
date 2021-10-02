@@ -81,6 +81,7 @@ const removeTables = async (req, res) => {
   }
 };
 
+
 module.exports = {
   addTableCategory,
   getTableCategory,
