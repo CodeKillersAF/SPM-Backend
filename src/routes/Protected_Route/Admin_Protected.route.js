@@ -14,7 +14,7 @@ const { getAllTakeAwayOrders, getAllInCompletedTakeAwayOrders, getAllCompletedTa
 
 const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders, setDeliveryOrderAsCompleted, deleteCompletedDeliveryOrder } = require('../../controllers/onlineDelivery.controller')
 
-const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller');
+// const { getAllDeliveryOrders , getAllInCompletedDeliveryOrders, getAllCompletedDeliveryOrders } = require('../../controllers/onlineDelivery.controller');
 // offers
 const { getAllOffers, addOffer } = require('../../controllers/offer.controller');
 // Supply record
