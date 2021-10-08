@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+// Schema for supply record
 const SupplyRecordSchema = new mongoose.Schema({
     supplier_name: {
         type: String,
